@@ -212,30 +212,50 @@ window.onpopstate = function(){
 };
 
 /* ---------- NO BUTTON ESCAPE ---------- */
-let moveCount = 0;
-const maxMoves = 3;
 const noBtn = document.getElementById("noBtn");
 
-noBtn.addEventListener("mouseover", function () {
-    if (moveCount < maxMoves) {
-        const btnWidth = noBtn.offsetWidth;
-        const btnHeight = noBtn.offsetHeight;
-        const padding = 20;
-        const x = Math.random() * (window.innerWidth - btnWidth - padding) + padding;
-        const y = Math.random() * (window.innerHeight - btnHeight - padding) + padding;
-        noBtn.style.position="fixed";
-        noBtn.style.left=x+"px";
-        noBtn.style.top=y+"px";
-        moveCount++;
-        if(moveCount===maxMoves){
-            setTimeout(()=>{
-                noBtn.style.position="relative";
-                noBtn.style.left="0";
-                noBtn.style.top="0";
-            },600);
-        }
+let escapeCount = 0;
+const maxEscape = 3;
+
+function moveNoButton() {
+
+    if (escapeCount >= maxEscape) return;
+
+    const padding = 20;
+    const btnRect = noBtn.getBoundingClientRect();
+
+    const maxX = window.innerWidth - btnRect.width - padding;
+    const maxY = window.innerHeight - btnRect.height - padding;
+
+    const x = Math.random() * maxX;
+    const y = Math.random() * maxY;
+
+    noBtn.style.position = "fixed";
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+
+    escapeCount++;
+}
+
+/* Laptop hover */
+noBtn.addEventListener("mouseenter", moveNoButton);
+
+/* 📱 Phone touch */
+noBtn.addEventListener("touchstart", function(e){
+    if (escapeCount < maxEscape){
+        e.preventDefault();   // stop clicking
+        moveNoButton();
     }
 });
+
+/* After 3 escapes → clickable */
+noBtn.addEventListener("click", function(){
+    if (escapeCount >= maxEscape){
+        document.getElementById("responseText").innerHTML =
+        "Not the correct option 😄";
+    }
+});
+
 
 /* Stars & Hearts */
 function createStar(){const s=document.createElement("div");s.className="star";s.innerHTML="✨";s.style.left=Math.random()*100+"vw";s.style.top=Math.random()*100+"vh";s.style.animationDuration=(3+Math.random()*3)+"s";document.body.appendChild(s);setTimeout(()=>s.remove(),5000);}
@@ -247,3 +267,4 @@ setInterval(createHeart,2000);
 
 </body>
 </html>
+
