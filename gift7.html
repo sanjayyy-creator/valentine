@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For My Sunflower🌻❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Great+Vibes&display=swap" rel="stylesheet">
+
+<style>
+body {
+    margin: 0;
+    padding: 0;
+    background: url("background.jpg") no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-family: 'Playfair Display', serif;
+    overflow: hidden;
+}
+
+/* QUESTION SCREEN */
+.question-page{
+    position:absolute;
+    text-align:center;
+    z-index:10000;
+    color:white;
+}
+
+.question-page h1{
+    font-size:42px;
+    margin-bottom:20px;
+    text-shadow:0 0 15px black;
+}
+
+.buttons button{
+    padding:12px 25px;
+    margin:10px;
+    border:none;
+    border-radius:25px;
+    font-size:16px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.buttons button:hover{ transform:scale(1.1); }
+
+.yes-btn{ background:#ff0080; color:white; }
+.ofcourse-btn{ background:#ff66b2; color:white; }
+.no-btn{ background:white; color:#ff0080; }
+
+#responseText{ margin-top:20px; font-size:22px; }
+
+/* LETTER PAGE */
+.letter-page{
+    display:none;
+    width:100%;
+    height:100%;
+    justify-content:center;
+    align-items:center;
+}
+
+/* Letter */
+.paper {
+    width: 70%;
+    max-width: 700px;
+    padding: 70px 60px;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(2px);
+    border-radius: 6px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+    position: relative;
+    z-index: 2;
+}
+
+.paper h1 {
+    text-align: center;
+    font-family: 'Great Vibes', cursive;
+    font-size: 48px;
+    margin-bottom: 30px;
+    color: #5a3e2b;
+}
+
+.paper p {
+    font-size: 20px;
+    line-height: 1.9;
+    text-align: center;
+    color: #4a3426;
+}
+
+.signature {
+    margin-top: 40px;
+    font-family: 'Great Vibes', cursive;
+    font-size: 36px;
+    text-align: right;
+    color: #5a3e2b;
+}
+
+/* Stars */
+.star {
+    position: fixed;
+    font-size: 18px;
+    color: gold;
+    animation: floatStar linear forwards;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0;
+}
+
+@keyframes floatStar {
+    0% { transform: translateY(0px) scale(0.5); opacity: 0; }
+    20% { opacity: 1; }
+    80% { opacity: 1; }
+    100% { transform: translateY(-120px) scale(1.2); opacity: 0; }
+}
+
+/* Hearts */
+.heart {
+    position: fixed;
+    font-size: 60px;
+    animation: floatHeart linear forwards;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0;
+}
+
+@keyframes floatHeart {
+    0% { transform: translateY(0px) scale(0.6); opacity: 0; }
+    20% { opacity: 1; }
+    50% { transform: translateY(-60px) scale(1.4); }
+    100% { transform: translateY(-200px) scale(1.1); opacity: 0; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- QUESTION -->
+<div class="question-page" id="questionPage">
+    <h1>Will You Be My Valentine? 💗</h1>
+    <div class="buttons">
+        <button class="yes-btn" onclick="showLetter()">Yes 💕</button>
+        <button class="ofcourse-btn" onclick="showLove()">Of course 💖</button>
+        <button class="no-btn" id="noBtn" onclick="showNo()">No 😜</button>
+    </div>
+    <div id="responseText"></div>
+</div>
+
+<!-- LETTER -->
+<div class="letter-page" id="letterPage">
+<div class="paper">
+    <h1>My Dearest Sanskriti</h1>
+    <p>
+        <i>It’s been a month since I last saw you…  
+        but not a single day passes without me missing you deeply. ❤️<br><br>
+
+        We may meet rarely…  
+        but those moments when we just hold hands, craving to hug each other,  
+        feel more magical than anything in this world🌎💗.<br><br>
+
+        The way you look into my eyes…  
+        it melts me every single time.  
+        And when you rest your head on my shoulder,  
+        I feel like the luckiest man alive. 💕<br><br>
+
+        My hands may be cold…  
+        but when I touch you and you start laughing because it tickles,  
+        that laugh becomes my favorite sound in the universe.🥹<br><br>
+
+        Distance can never reduce what I feel for you.  
+        You are my peace, my happiness, my heartbeat.  
+        I can’t wait to hold you tight again and never let go. ❤️<br><br>
+
+        I love you my mutheeeee.</i>
+    </p>
+    <div class="signature">Forever Yours ❤️</div>
+</div>
+</div>
+
+<script>
+
+/* ---------- HISTORY CONTROL ---------- */
+function goQuestion(){
+    document.getElementById("letterPage").style.display="none";
+    document.getElementById("questionPage").style.display="block";
+}
+
+function showLetter(){
+    history.pushState({page:"letter"}, "");
+    document.getElementById("questionPage").style.display="none";
+    document.getElementById("letterPage").style.display="flex";
+}
+
+function showLove(){
+    history.pushState({page:"love"}, "");
+    document.getElementById("responseText").innerHTML =
+        "<span style='color:black;font-weight:600;'>I love youuuuuuuu sooooo muuchhhhhhhhhh more than words can ever express 💖.<br> YOU MEANN TO ME A LOT <br> I misss youuuu reallyy bad like the moon misses the sun in dawn💗✨</span>";
+}
+
+function showNo(){
+    history.pushState({page:"no"}, "");
+    document.getElementById("responseText").innerHTML =
+        "<h2>That is not the correct option 😁😁😁</h2>";
+}
+
+/* Back button behaviour */
+window.onpopstate = function(){
+    goQuestion();
+    document.getElementById("responseText").innerHTML="";
+};
+
+/* ---------- NO BUTTON ESCAPE ---------- */
+let moveCount = 0;
+const maxMoves = 3;
+const noBtn = document.getElementById("noBtn");
+
+noBtn.addEventListener("mouseover", function () {
+    if (moveCount < maxMoves) {
+        const btnWidth = noBtn.offsetWidth;
+        const btnHeight = noBtn.offsetHeight;
+        const padding = 20;
+        const x = Math.random() * (window.innerWidth - btnWidth - padding) + padding;
+        const y = Math.random() * (window.innerHeight - btnHeight - padding) + padding;
+        noBtn.style.position="fixed";
+        noBtn.style.left=x+"px";
+        noBtn.style.top=y+"px";
+        moveCount++;
+        if(moveCount===maxMoves){
+            setTimeout(()=>{
+                noBtn.style.position="relative";
+                noBtn.style.left="0";
+                noBtn.style.top="0";
+            },600);
+        }
+    }
+});
+
+/* Stars & Hearts */
+function createStar(){const s=document.createElement("div");s.className="star";s.innerHTML="✨";s.style.left=Math.random()*100+"vw";s.style.top=Math.random()*100+"vh";s.style.animationDuration=(3+Math.random()*3)+"s";document.body.appendChild(s);setTimeout(()=>s.remove(),5000);}
+function createHeart(){const h=document.createElement("div");h.className="heart";h.innerHTML="💗";h.style.left=Math.random()*100+"vw";h.style.top=Math.random()*100+"vh";h.style.animationDuration=(4+Math.random()*3)+"s";document.body.appendChild(h);setTimeout(()=>h.remove(),7000);}
+setInterval(createStar,800);
+setInterval(createHeart,2000);
+
+</script>
+
+</body>
+</html>
